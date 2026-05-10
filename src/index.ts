@@ -48,7 +48,6 @@ app.post("/api/v1/signup", async (req, res) => {
   }
 });
 
-
 app.post("/api/v1/signin", async (req, res) => {
   const parsedData = SigninSchema.safeParse(req.body);
   if (!parsedData.success){
@@ -112,6 +111,16 @@ app.get("/api/v1/me", middleware, async (req, res) => {
   }
 })
 
+app.post("/api/v1/logout", async (req, res) => {
+  res.clearCookie("token", {
+    httpOnly: true,
+    sameSite: "lax",
+    secure: false
+  });
+  res.json({
+    message: "Logged Out!"
+  })
+})
 
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
