@@ -1,0 +1,5 @@
+  <form [formGroup]="loginFrom" (ngSubmit)="onSubmit()">
+    <input [formControl]="loginFrom.controls.username" placeholder="Title">
+    <input [formControl]="loginFrom.controls.password" placeholder="Description">
+    <button style="cursor: pointer;" type="submit">Login</button>
+  </form>

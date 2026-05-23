@@ -19,7 +19,7 @@ app.use(express.json());
 app.use(cookieParser());
 app.use(cors({
   credentials: true,
-  origin: "http://locoalhost:4200"
+  origin: "http://localhost:4200"
 }))
 
 app.post("/api/v1/signup", async (req, res) => {
@@ -78,7 +78,7 @@ app.post("/api/v1/signin", async (req, res) => {
     
     res.cookie("token", token, {
       httpOnly: true,
-      secure: process.env.NODE_ENV !== 'production',
+      secure: process.env.NODE_ENV === 'production',
       sameSite: "lax"
     })
     res.status(200).json(`Logged In as ${user.username}`);
