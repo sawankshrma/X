@@ -1,5 +1,19 @@
-  <form [formGroup]="loginFrom" (ngSubmit)="onSubmit()">
-    <input [formControl]="loginFrom.controls.username" placeholder="Title">
-    <input [formControl]="loginFrom.controls.password" placeholder="Description">
-    <button style="cursor: pointer;" type="submit">Login</button>
-  </form>
+<app-main-popup-modal>
+  <div class="w-[90vw] max-w-sm">
+    <div class="w-full text-white text-lg font-sans py-3 flex justify-center border-b border-zinc-700 mb-5">
+      <b>LogIn</b>
+    </div>
+    <form [formGroup]="loginFrom" (ngSubmit)="onSubmit()">
+      <input [formControl]="loginFrom.controls.username" placeholder="Username"
+        class="w-9/10 px-5 py-2.5 mb-2.5 text-[15px] rounded-lg bg-zinc-800 text-white outline-none border-none tracking-widest block mx-auto"/>
+      <input [formControl]="loginFrom.controls.password" placeholder="Password" type="password"
+        class="w-9/10 px-5 py-2.5 mb-2.5 text-[15px] rounded-lg bg-zinc-800 text-white outline-none border-none tracking-widest block mx-auto"/>
+      <div class="flex justify-center mt-2 mb-1">
+        <button type="submit" class="px-0 py-2 w-1/4 text-[15px] rounded-md bg-blue-600 hover:bg-blue-700 text-white cursor-pointer border-none">Login</button>
+      </div>
+    </form>
+  </div>
+  <div modal-footer class="text-zinc-400 text-sm font-sans mt-3 text-center">
+    New User? <a routerLink="/signup" class="font-bold text-white cursor-pointer">Sign Up</a>
+  </div>
+</app-main-popup-modal>
