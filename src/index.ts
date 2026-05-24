@@ -78,8 +78,9 @@ app.post("/api/v1/signin", async (req, res) => {
     
     res.cookie("token", token, {
       httpOnly: true,
-      secure: process.env.NODE_ENV === 'production',
-      sameSite: "lax"
+      secure: false,
+      sameSite: "lax",
+      path: '/'
     })
     res.status(200).json(`Logged In as ${user.username}`);
 
@@ -112,14 +113,23 @@ app.get("/api/v1/me", middleware, async (req, res) => {
 })
 
 app.post("/api/v1/logout", async (req, res) => {
-  res.clearCookie("token", {
-    httpOnly: true,
-    sameSite: "lax",
-    secure: false
-  });
-  res.json({
-    message: "Logged Out!"
-  })
+  console.log('logout hit!')
+  try {
+    res.clearCookie("token", {
+      httpOnly: true,
+      sameSite: "lax",
+      secure: false,
+      path: '/'
+    });
+    res.status(200).json({
+      message: "Logged Out!"
+    })
+  }
+  catch(e){
+    res.status(411).json({
+      message: "problem in try catch"
+    })
+  }
 })
 
 app.listen(PORT, () => {

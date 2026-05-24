@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { Subject, tap, catchError, of, BehaviorSubject } from 'rxjs';
 import { environment } from '../../environments/enviornments';
-import { loginParams } from './Types/types';
+import { loginParams, signupParams } from './Types/types';
 
 @Injectable({
   providedIn: 'root',
@@ -22,8 +22,16 @@ export class UserService {
     return this.http.post(this.host + '/signin', params, {withCredentials: true})
   }
 
+  signup (params: signupParams) {
+    return this.http.post(this.host + '/signup', params)
+  }
+
   setLoggedIn(val: boolean) {
     this.isLoggedIn.next(val);
+  }
+
+  logout() {
+    return this.http.post(this.host + '/logout', {}, {withCredentials: true})
   }
 
   checkAuth() {

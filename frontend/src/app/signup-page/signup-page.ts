@@ -6,36 +6,37 @@ import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } 
 @Component({
   selector: 'app-login-page',
   imports: [ReactiveFormsModule],
-  templateUrl: './login-page.html',
-  styleUrl: './login-page.css',
+  templateUrl: './signup-page.html',
+  styleUrl: './signup-page.css',
 })
-export class LoginPage implements OnInit{
+export class SignupPage implements OnInit{
   private userService = inject(UserService);
   private router = inject(Router)
   
-  loginFrom = new FormGroup({
+  signupForm = new FormGroup({
     username: new FormControl<string>('', {nonNullable:true, validators: Validators.required}),
+    email: new FormControl<string>('', {nonNullable:true, validators: Validators.required}),
     password: new FormControl<string>('', {nonNullable:true, validators: Validators.required}),
+    profilePicUrl: new FormControl<string>('', {nonNullable:true})
   })
 
   ngOnInit () {
     this.userService.getLoggedInState().subscribe(value => {
       if (value === true) {
         console.log('logged in already');
-        // this.router.navigate(['/home'])
+        this.router.navigate(['/home'])
       }
     })
   }
 
   onSubmit() {
-    this.userService.login(this.loginFrom.getRawValue()).subscribe({
+    this.userService.signup(this.signupForm.getRawValue()).subscribe({
       next: () => {
-        this.userService.setLoggedIn(true);
-        console.log("logged in");
-        this.router.navigate(["/home"])
+        console.log("Signed Up");
+        this.router.navigate(["/login"])
       },
       error: () => {
-        console.log('error loggin in!');
+        console.log('error signing up!');
       }
     })
   }

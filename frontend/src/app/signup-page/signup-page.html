@@ -1,0 +1,7 @@
+  <form [formGroup]="signupForm" (ngSubmit)="onSubmit()">
+    <input [formControl]="signupForm.controls.username" placeholder="choose a Username">
+    <input [formControl]="signupForm.controls.email" placeholder="Email">
+    <input [formControl]="signupForm.controls.password" placeholder="password">
+    <input [formControl]="signupForm.controls.profilePicUrl" placeholder="Profile Pic Url">
+    <button style="cursor: pointer;" type="submit">Login</button>
+  </form>
